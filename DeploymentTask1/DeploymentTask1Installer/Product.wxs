@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<!-- Program Details -->
+  <Product Id="*" Name="Deployment Task 1" Language="1033" Version="1.0.0.0" Manufacturer="Jye Stillitano" UpgradeCode="6dcda4c8-c2ff-4583-8184-400e07c9bba7">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate EmbedCab="yes"/>
+
+		<Feature Id="ProductFeature" Title="DeploymentTask1" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+  <!-- Install location. Targeting Program Files Folder -->
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="DeploymentTask1" Name="DeploymentTask1" />
+			</Directory>
+		</Directory>
+	</Fragment>
+
+  <!-- Installer File Specifications -->
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="DeploymentTask1">
+			<Component Id="DeploymentTask1.exe" Guid="ECD5FC95-3935-4F3D-B23A-6DD3616FD2E8">
+        <File Id="DeploymentTask1.exe" Name="DeploymentTask1.exe" Source="$(var.DeploymentTask1.TargetDir)DeploymentTask1.exe"></File>
+      </Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
